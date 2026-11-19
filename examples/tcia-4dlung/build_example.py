@@ -272,7 +272,8 @@ def write_patient_json(root: Path, patient_id: str, study_ids: list[str]) -> Non
             "performed_by": "upstream collection",
             "tooling": "TCIA de-identification pipeline",
             "attestation": (
-                "Publicly released, de-identified upstream. Open-H-4DPhysio identifiers are assigned "
+                "Publicly released, de-identified upstream. Open-H-4DPhysio identifiers are "
+                "assigned "
                 "locally and do not encode the upstream subject identifier."
             ),
         },

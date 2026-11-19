@@ -203,7 +203,8 @@ def test_convert_study_writes_volumes_and_records_the_decoder(tmp_path, monkeypa
     (study_dir / "dicom").mkdir(parents=True)
     write_us(study_dir / "dicom" / "00000.dcm", private_creator="Philips US Imaging DD 045")
     (study_dir / "study.json").write_text(
-        json.dumps({"schema": "open-h-4dphysio/study/1.0", "study_id": "STAN-0001A"}), encoding="utf-8"
+        json.dumps({"schema": "open-h-4dphysio/study/1.0", "study_id": "STAN-0001A"}),
+        encoding="utf-8",
     )
 
     report = us_vendor.convert_study(study_dir, VENDOR_PHILIPS)

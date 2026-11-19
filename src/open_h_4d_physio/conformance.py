@@ -114,8 +114,8 @@ def _check_min_timepoints(study: dict[str, Any]) -> str | None:
     n = study.get("n_timepoints")
     if not isinstance(n, int) or n < 2:
         return (
-            f"n_timepoints is {n!r}; Open-H-4DPhysio collects 4D data, so a study needs at least two "
-            f"time points. A single time point is a 3D study."
+            f"n_timepoints is {n!r}; Open-H-4DPhysio collects 4D data, so a study needs at "
+            f"least two time points. A single time point is a 3D study."
         )
     return None
 

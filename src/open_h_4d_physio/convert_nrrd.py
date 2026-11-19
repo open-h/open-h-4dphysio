@@ -323,15 +323,18 @@ def update_study_json(
             .upper()
             or "unknown"
         ),
-        "converter": f"open_h_4d_physio {__version__} convert_nrrd (SimpleITK {info['sitk_version']})",
+        "converter": (
+            f"open_h_4d_physio {__version__} convert_nrrd (SimpleITK {info['sitk_version']})"
+        ),
         "converter_args": None,
         "converted_at": utc_now(),
         "n_source_files": len(info["source_files"]),
     }
     study.setdefault(
         "notes",
-        "Converted by open_h_4d_physio.convert_nrrd. Fields left null are not derivable from the source "
-        "and must be supplied by the contributor: modality, organ, motion, coverage, contrast.",
+        "Converted by open_h_4d_physio.convert_nrrd. Fields left null are not derivable from "
+        "the source and must be supplied by the contributor: modality, organ, motion, "
+        "coverage, contrast.",
     )
 
     path.write_text(json.dumps(study, indent=2) + "\n", encoding="utf-8")
@@ -368,7 +371,8 @@ def convert(
 
     if len(volumes) < 2:
         raise NrrdConvertError(
-            f"only {len(volumes)} time point(s) were produced; Open-H-4DPhysio requires at least two."
+            f"only {len(volumes)} time point(s) were produced; Open-H-4DPhysio requires at "
+            f"least two."
         )
 
     from .check_volumes import read_header

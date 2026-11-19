@@ -147,8 +147,8 @@ def resolve_crosswalk_path(out_root: Path, explicit: Path | None, submission_id:
     if path == root or root in path.parents:
         raise OrganizeError(
             f"refusing to write the crosswalk to {path}: it is inside the submission root "
-            f"{root}. The crosswalk maps Open-H-4DPhysio identifiers back to real patients and must "
-            f"never travel with the data. Leave --crosswalk unset to use "
+            f"{root}. The crosswalk maps Open-H-4DPhysio identifiers back to real patients and "
+            f"must never travel with the data. Leave --crosswalk unset to use "
             f"{crosswalk_dir()}, or point it somewhere outside the submission."
         )
     return path
@@ -253,8 +253,8 @@ def study_stub(
         },
         "waivers": [],
         "notes": (
-            f"Stub written by open_h_4d_physio {__version__} organize_dicom. Fields left null are not "
-            f"derivable from DICOM headers and must be supplied by the contributor: organ, "
+            f"Stub written by open_h_4d_physio {__version__} organize_dicom. Fields left null "
+            f"are not derivable from DICOM headers and must be supplied by the contributor: organ, "
             f"motion, coverage, protocol, clinical_indication, contrast."
         ),
     }

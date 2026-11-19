@@ -312,9 +312,9 @@ def update_pins(tag: str, keys: list[str]) -> dict:
         "tag": tag,
         "source": "https://github.com/rordenlab/dcm2niix/releases",
         "note": (
-            "Regenerate with: python -m open_h_4d_physio.fetch_dcm2niix --update-pins --all-platforms "
-            "--tag <tag>. Review the diff in a pull request -- GitHub release assets are "
-            "mutable, so a change here is a signal, not a formality."
+            "Regenerate with: python -m open_h_4d_physio.fetch_dcm2niix --update-pins "
+            "--all-platforms --tag <tag>. Review the diff in a pull request -- GitHub release "
+            "assets are mutable, so a change here is a signal, not a formality."
         ),
         "assets": assets,
     }

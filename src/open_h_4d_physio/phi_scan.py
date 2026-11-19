@@ -276,8 +276,8 @@ def scan_dicom_file(path: Path, relative: str = "") -> list[PhiFinding]:
                 message=(
                     f"{len(private_blocks)} private tag group(s) present "
                     f"({', '.join(hex(g) for g in private_blocks[:6])}). Vendors store arbitrary "
-                    f"data there, including identifiers. Open-H-4DPhysio drops every private tag when "
-                    f"it retains DICOM."
+                    f"data there, including identifiers. Open-H-4DPhysio drops every private tag "
+                    f"when it retains DICOM."
                 ),
                 path=location,
             )

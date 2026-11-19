@@ -163,8 +163,8 @@ def _check_forbidden_names(root: Path, report: Report) -> None:
             report.error(
                 "E_FORBIDDEN_FILE",
                 f"{path.name!r} matches {match.group(1)!r}, which suggests a re-identification "
-                f"key or unredacted PHI. Nothing linking Open-H-4DPhysio identifiers back to source "
-                f"patient identifiers may appear inside a submission.",
+                f"key or unredacted PHI. Nothing linking Open-H-4DPhysio identifiers back to "
+                f"source patient identifiers may appear inside a submission.",
                 _rel(root, path),
             )
 
