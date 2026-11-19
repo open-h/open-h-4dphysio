@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pytest
 
-from openh4d.verify_layout import verify
+from open_h_4d_physio.verify_layout import verify
 
 ROOT = Path(__file__).resolve().parent.parent
 EXAMPLES = ROOT / "examples"
@@ -113,7 +113,7 @@ def test_synthetic_example_leaves_no_source_identifier_in_the_output(tmp_path, d
 
 def test_synthetic_example_produces_measurable_motion(tmp_path, dcm2niix_path):
     """A submission that passes every structural check can still be static."""
-    from openh4d.motion_report import build_report
+    from open_h_4d_physio.motion_report import build_report
 
     out = tmp_path / "submission"
     _assert_clean_exit(
@@ -143,7 +143,7 @@ def test_synthetic_example_data_card_has_hf_frontmatter(tmp_path, dcm2niix_path)
     text = (out / "README.md").read_text(encoding="utf-8")
     assert text.startswith("---\n")
     assert "license: cc-by-4.0" in text
-    assert "open-h-4d" in text
+    assert "open-h-4dphysio" in text
 
 
 # --- heavy -------------------------------------------------------------------
@@ -201,7 +201,7 @@ def test_truncalvalve_example(tmp_path):
 @pytest.mark.heavy
 def test_heavy_examples_produce_measurable_motion(tmp_path):
     """Real 4D data must move, or the submission is 3D scans in a 4D wrapper."""
-    from openh4d.motion_report import build_report
+    from open_h_4d_physio.motion_report import build_report
 
     script = EXAMPLES / "truncalvalve-4dct" / "build_example.py"
     out = tmp_path / "submission"

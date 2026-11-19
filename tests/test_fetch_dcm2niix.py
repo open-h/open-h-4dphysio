@@ -13,8 +13,8 @@ import zipfile
 
 import pytest
 
-from openh4d import fetch_dcm2niix as fetch
-from openh4d.fetch_dcm2niix import AssetPin, Dcm2niixError
+from open_h_4d_physio import fetch_dcm2niix as fetch
+from open_h_4d_physio.fetch_dcm2niix import AssetPin, Dcm2niixError
 
 BINARY = fetch.binary_name()
 
@@ -22,7 +22,7 @@ BINARY = fetch.binary_name()
 @pytest.fixture(autouse=True)
 def isolated_cache(tmp_path, monkeypatch):
     """Never touch the developer's real cache."""
-    monkeypatch.setenv("OPENH4D_CACHE_DIR", str(tmp_path / "cache"))
+    monkeypatch.setenv("OPEN_H_4D_PHYSIO_CACHE_DIR", str(tmp_path / "cache"))
     monkeypatch.delenv(fetch.ENV_BINARY, raising=False)
     monkeypatch.delenv(fetch.ENV_OFFLINE, raising=False)
     return tmp_path / "cache"

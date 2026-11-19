@@ -409,7 +409,7 @@ wheels = [
 ]
 
 [[package]]
-name = "open-h-4d"
+name = "open-h-4dphysio"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

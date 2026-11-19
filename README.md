@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/open-h-4d-header-with-hyphen.png" alt="Open-H-4D" width="100%">
+<img src="assets/open-h-4dphysio-header-with-hyphen.png" alt="Open-H-4DPhysio" width="100%">
 
-# Open-H-4D
+# Open-H-4DPhysio
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Data](https://img.shields.io/badge/Data-OpenMDW-green.svg?style=for-the-badge)](https://openmdw.ai/)
@@ -15,7 +15,7 @@
 
 ## About
 
-Open-H-4D is an [Open-H.org](https://open-h.org) initiative to collect **20,000
+Open-H-4DPhysio is an [Open-H.org](https://open-h.org) initiative to collect **20,000
 total cases** of cardiac and/or respiratory motion, including real patient cases
 and simulated cases. Building on Open-H-Embodiment, it aligns leading institutions
 around a single openly licensed corpus. 4D CT, MRI and ultrasound images are
@@ -29,7 +29,7 @@ biomarkers that inform patient-specific physics parameters, training diagnostic
 models that incorporate physiological data, and simulating clinical signals such
 as EKG and spirometry as well as motion artifacts in 3D images.
 
-NVIDIA sponsors Open-H-4D by pre-processing all submissions and enabling free,
+NVIDIA sponsors Open-H-4DPhysio by pre-processing all submissions and enabling free,
 open access to the dataset, foundation model weights and training code on project
 completion.
 
@@ -37,19 +37,19 @@ Released on Hugging Face under the [**OpenMDW**](https://openmdw.ai/) license.
 
 ## This repository
 
-Tooling for preparing and checking an Open-H-4D contribution, and the normative
+Tooling for preparing and checking an Open-H-4DPhysio contribution, and the normative
 specification of what a submission looks like.
 
 | | |
 |---|---|
-| [`skills/open-h-4d-shared/layout-spec.md`](skills/open-h-4d-shared/layout-spec.md) | **The submission layout specification.** Start here. |
+| [`skills/open-h-4dphysio-shared/layout-spec.md`](skills/open-h-4dphysio-shared/layout-spec.md) | **The submission layout specification.** Start here. |
 | [`skills/`](skills/) | Agent skills for organizing, converting, verifying and evaluating submissions |
-| [`src/openh4d/`](src/openh4d/) | The Python package every skill invokes |
+| [`src/open_h_4d_physio/`](src/open_h_4d_physio/) | The Python package every skill invokes |
 | [`examples/`](examples/) | Three worked examples that each build a complete submission |
 
 ## How to participate
 
-1. **Review the CFP** — [Call for Proposals](assets/Open-H-4D_Call_For_Proposals.pdf)
+1. **Review the CFP** — [Call for Proposals](assets/Open-H-4DPhysio_Call_For_Proposals.pdf)
    for scope, eligibility, data requirements and review criteria.
 2. **Submit a proposal** — describing the data you would contribute, per CFP §8,
    via the [submission form](https://forms.gle/Y9pUAHhG7xYCWDoD7). Pre-proposals
@@ -57,7 +57,7 @@ specification of what a submission looks like.
    and approval or licensing feasibility. Full proposals are PDF, at most 5 pages
    excluding CVs, and propose at least 20 cases for case-based datasets.
 3. **Prepare your data** — using the tooling here. The
-   [layout specification](skills/open-h-4d-shared/layout-spec.md) is the contract.
+   [layout specification](skills/open-h-4dphysio-shared/layout-spec.md) is the contract.
 4. **Co-author the release** — contributing teams are named co-authors on both
    the dataset publication and the follow-up foundation-model publication, receive
    early access to evaluation checkpoints and the dataset itself, and are
@@ -113,13 +113,13 @@ always starts at `A`:
 Images are `.nii.gz` or DICOM. The letter suffix starts at `A` even for a patient
 with one study, so adding a second later never renames the first. The full rules,
 including the sidecar schemas and the CFP conformance thresholds, are in the
-[layout specification](skills/open-h-4d-shared/layout-spec.md).
+[layout specification](skills/open-h-4dphysio-shared/layout-spec.md).
 
 ## Quickstart
 
 ```bash
-git clone https://github.com/open-h/open-h-4d
-cd open-h-4d
+git clone https://github.com/open-h/open-h-4dphysio
+cd open-h-4dphysio
 uv sync
 python scripts/bootstrap_skills.py      # makes the skills discoverable
 ```
@@ -133,7 +133,7 @@ uv run python examples/synthetic-4d/build_example.py --out /tmp/oh4d-synthetic
 Check your own data:
 
 ```bash
-uv run python -m openh4d.verify_layout <your-submission-root>
+uv run python -m open_h_4d_physio.verify_layout <your-submission-root>
 ```
 
 Exit 0 means compliant.
@@ -142,10 +142,10 @@ Exit 0 means compliant.
 
 | Starting point | Command |
 |---|---|
-| A DICOM export | `python -m openh4d.dicom_index <src> --out plan.json` then `python -m openh4d.organize_dicom --plan plan.json --out <root> --id-prefix <PREFIX> --apply` |
-| Organized DICOM | `python -m openh4d.convert_dicom <root>/<STUDY>` |
-| NRRD, Slicer sequence, or per-phase NIfTI | `python -m openh4d.convert_nrrd <src> --out <root>/<STUDY>` |
-| Anything, to check it | `python -m openh4d.verify_layout <root>` |
+| A DICOM export | `python -m open_h_4d_physio.dicom_index <src> --out plan.json` then `python -m open_h_4d_physio.organize_dicom --plan plan.json --out <root> --id-prefix <PREFIX> --apply` |
+| Organized DICOM | `python -m open_h_4d_physio.convert_dicom <root>/<STUDY>` |
+| NRRD, Slicer sequence, or per-phase NIfTI | `python -m open_h_4d_physio.convert_nrrd <src> --out <root>/<STUDY>` |
+| Anything, to check it | `python -m open_h_4d_physio.verify_layout <root>` |
 
 `dcm2niix` is downloaded, version-pinned and cached automatically on first use.
 
@@ -191,16 +191,16 @@ mature implementation — RSNA CTP, or any DICOM PS3.15 Basic Application Level
 Confidentiality Profile implementation — and then check:
 
 ```bash
-python -m openh4d.phi_scan <source-dir>
+python -m open_h_4d_physio.phi_scan <source-dir>
 ```
 
-On top of that, Open-H-4D adds defense in depth: `organize_dicom` refuses to run
+On top of that, Open-H-4DPhysio adds defense in depth: `organize_dicom` refuses to run
 on obviously identified data, and any DICOM it retains is stripped to a
 conservative tag allowlist. Neither is a substitute for de-identifying properly.
 
 The identifier crosswalk is written **outside** the submission by design, and the
 verifier rejects any submission containing one. See
-[`skills/open-h-4d-shared/phi-checklist.md`](skills/open-h-4d-shared/phi-checklist.md).
+[`skills/open-h-4dphysio-shared/phi-checklist.md`](skills/open-h-4dphysio-shared/phi-checklist.md).
 
 ## Key dates
 

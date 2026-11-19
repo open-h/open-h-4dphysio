@@ -12,8 +12,8 @@ import shutil
 import numpy as np
 import pytest
 
-from openh4d.synthetic import generate
-from openh4d.verify_layout import verify
+from open_h_4d_physio.synthetic import generate
+from open_h_4d_physio.verify_layout import verify
 
 
 @pytest.fixture(scope="module")

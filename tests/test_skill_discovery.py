@@ -54,12 +54,12 @@ def test_no_stale_claude_skills_entries(repo_root):
 
 
 def test_shared_support_dir_is_not_exposed_as_a_skill(repo_root):
-    """skills/open-h-4d-shared has no SKILL.md, so it must not be discoverable."""
-    shared = repo_root / "skills" / "open-h-4d-shared"
+    """skills/open-h-4dphysio-shared has no SKILL.md, so it must not be discoverable."""
+    shared = repo_root / "skills" / "open-h-4dphysio-shared"
     if not shared.is_dir():
         pytest.skip("shared support directory not created yet")
     assert not (shared / "SKILL.md").exists(), (
-        "open-h-4d-shared must not have a SKILL.md -- it is support material read by "
+        "open-h-4dphysio-shared must not have a SKILL.md -- it is support material read by "
         "the other skills, not something an agent should invoke"
     )
-    assert not (repo_root / ".claude" / "skills" / "open-h-4d-shared").exists()
+    assert not (repo_root / ".claude" / "skills" / "open-h-4dphysio-shared").exists()

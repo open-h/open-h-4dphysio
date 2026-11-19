@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Vendor 4D ultrasound detection, gating and fallback.
 
-The vendor decoder bodies are not finished -- neither Open-H-4D example dataset
+The vendor decoder bodies are not finished -- neither Open-H-4DPhysio example dataset
 contains vendor 4D echo, so there are no real bytes to build against. What is
 finished, and what these tests cover, is everything around them: recognising the
 vendor, refusing output a decoder cannot vouch for, and turning both cases into
@@ -15,9 +15,9 @@ opens cleanly with the wrong geometry.
 import numpy as np
 import pytest
 
-from openh4d import us_vendor
-from openh4d.synthetic_dicom import write_series
-from openh4d.us_vendor import (
+from open_h_4d_physio import us_vendor
+from open_h_4d_physio.synthetic_dicom import write_series
+from open_h_4d_physio.us_vendor import (
     VENDOR_GE_KRETZ,
     VENDOR_PHILIPS,
     DecodedSeries,
@@ -203,7 +203,7 @@ def test_convert_study_writes_volumes_and_records_the_decoder(tmp_path, monkeypa
     (study_dir / "dicom").mkdir(parents=True)
     write_us(study_dir / "dicom" / "00000.dcm", private_creator="Philips US Imaging DD 045")
     (study_dir / "study.json").write_text(
-        json.dumps({"schema": "open-h-4d/study/1.0", "study_id": "STAN-0001A"}), encoding="utf-8"
+        json.dumps({"schema": "open-h-4dphysio/study/1.0", "study_id": "STAN-0001A"}), encoding="utf-8"
     )
 
     report = us_vendor.convert_study(study_dir, VENDOR_PHILIPS)
@@ -228,7 +228,7 @@ def test_convert_study_with_no_dicom_is_a_clear_error(tmp_path):
 
 def test_convert_dicom_routes_vendor_ultrasound_away_from_dcm2niix(tmp_path):
     """dcm2niix on a private-tag 4D echo produces a file that is quietly wrong."""
-    from openh4d.convert_dicom import detect_vendor_ultrasound
+    from open_h_4d_physio.convert_dicom import detect_vendor_ultrasound
 
     study_dir = tmp_path / "STAN-0001A"
     (study_dir / "dicom" / "t0000").mkdir(parents=True)
@@ -240,7 +240,7 @@ def test_convert_dicom_routes_vendor_ultrasound_away_from_dcm2niix(tmp_path):
 
 
 def test_ordinary_dicom_is_left_to_dcm2niix(tmp_path):
-    from openh4d.convert_dicom import detect_vendor_ultrasound
+    from open_h_4d_physio.convert_dicom import detect_vendor_ultrasound
 
     study_dir = tmp_path / "STAN-0001A"
     phase = study_dir / "dicom" / "t0000"

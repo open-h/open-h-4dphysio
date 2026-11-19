@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """The prose spec and the code must not drift apart.
 
-``skills/open-h-4d-shared/layout-spec.md`` is what every agent skill reads, and
-``openh4d`` is what actually enforces the rules. If they disagree, contributors
+``skills/open-h-4dphysio-shared/layout-spec.md`` is what every agent skill reads, and
+``open_h_4d_physio`` is what actually enforces the rules. If they disagree, contributors
 are told one thing and graded on another. These tests make the documentation
 load-bearing, so drift fails CI instead of surfacing as a confused contributor.
 """
@@ -12,10 +12,10 @@ import re
 
 import pytest
 
-from openh4d import naming, schema
+from open_h_4d_physio import naming, schema
 
-SPEC = "skills/open-h-4d-shared/layout-spec.md"
-SHARED = "skills/open-h-4d-shared"
+SPEC = "skills/open-h-4dphysio-shared/layout-spec.md"
+SHARED = "skills/open-h-4dphysio-shared"
 
 
 @pytest.fixture
@@ -35,7 +35,7 @@ def _grammar_block(spec_text: str) -> dict[str, str]:
 
 
 def test_grammar_block_matches_compiled_patterns(spec_text):
-    """The three regexes in the spec are the three regexes in openh4d.naming."""
+    """The three regexes in the spec are the three regexes in open_h_4d_physio.naming."""
     grammar = _grammar_block(spec_text)
     expected = {
         "patient_id": naming.PATIENT_ID_RE.pattern,
@@ -43,7 +43,7 @@ def test_grammar_block_matches_compiled_patterns(spec_text):
         "ehr_dir": naming.EHR_DIR_RE.pattern,
     }
     assert grammar == expected, (
-        "the naming grammar in layout-spec.md has drifted from openh4d.naming. "
+        "the naming grammar in layout-spec.md has drifted from open_h_4d_physio.naming. "
         "Update whichever one is wrong -- contributors read the spec."
     )
 
@@ -71,7 +71,7 @@ def test_every_template_key_exists_in_the_schema(repo_root, template, schema_nam
 
 def test_every_conformance_rule_id_is_documented(spec_text):
     """Every rule the verifier can emit appears in the spec's rule table."""
-    from openh4d import conformance
+    from open_h_4d_physio import conformance
 
     for rule in conformance.RULES:
         assert f"`{rule.rule_id}`" in spec_text, (

@@ -33,7 +33,7 @@ def dcm2niix_path():
     it in an explicit step before pytest, which is also what warms the cache on a
     developer machine.
     """
-    from openh4d.fetch_dcm2niix import Dcm2niixError, resolve
+    from open_h_4d_physio.fetch_dcm2niix import Dcm2niixError, resolve
 
     try:
         return resolve(offline=True)

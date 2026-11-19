@@ -1,6 +1,6 @@
 # TCIA 4D-Lung example
 
-Restructures the public TCIA 4D-Lung release into the Open-H-4D submission
+Restructures the public TCIA 4D-Lung release into the Open-H-4DPhysio submission
 layout. Eight subjects of respiratory-gated 4D CT, ten phases each.
 
 ```bash
@@ -44,7 +44,7 @@ Drop that step and you have ten volumes in an arbitrary order.
 
 The upstream release publishes no subject-level metadata — no age, sex, vitals
 or staging. Those fields are left `null` rather than guessed, and `patient.json`
-says so. A real Open-H-4D submission is expected to fill them in.
+says so. A real Open-H-4DPhysio submission is expected to fill them in.
 
 CT dose is likewise unknown. The RFP asks every CT contribution to declare
 whether the acquisition was low dose, so the gap is recorded as an explicit

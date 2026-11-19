@@ -1,14 +1,14 @@
 # Agents in this repo
 
 Cross-agent instructions for AI tools (Claude Code, Codex CLI, OpenCode, Copilot
-CLI, Gemini CLI) working on the Open-H-4D repository.
+CLI, Gemini CLI) working on the Open-H-4DPhysio repository.
 
 ## The one structural idea
 
-**All deterministic logic lives in the Python package `src/openh4d/`. Skill
+**All deterministic logic lives in the Python package `src/open_h_4d_physio/`. Skill
 directories contain prose and reference material only.**
 
-Skills invoke logic as `python -m openh4d.<tool>`. Nothing executable lives under
+Skills invoke logic as `python -m open_h_4d_physio.<tool>`. Nothing executable lives under
 `skills/`.
 
 This is what makes every rule ruff-linted, unit-tested and importable, and it
@@ -18,7 +18,7 @@ so the discovery mechanism below never has to carry executable content across a
 symlink.
 
 If you find yourself about to put a script in a skill directory, put it in
-`src/openh4d/` and call it from the skill.
+`src/open_h_4d_physio/` and call it from the skill.
 
 ## Skills
 
@@ -27,16 +27,16 @@ Each is a directory with a `SKILL.md` plus whatever `references/` it needs.
 
 | Skill | Purpose |
 |---|---|
-| [`skills/open-h-4d-organize-dicom/`](skills/open-h-4d-organize-dicom/) | Split a DICOM pile into the Open-H-4D layout: group by patient, study and time point, assign de-identified identifiers, keep the crosswalk outside the submission |
-| [`skills/open-h-4d-convert/`](skills/open-h-4d-convert/) | Convert to per-time-point NIfTI — DICOM via pinned dcm2niix, NRRD/Slicer sequences via SimpleITK, vendor 4D ultrasound via the private-tag decoder |
-| [`skills/open-h-4d-verify-layout/`](skills/open-h-4d-verify-layout/) | Verify a submission against the layout specification and explain failures |
-| [`skills/open-h-4d-submission-eval/`](skills/open-h-4d-submission-eval/) | Seven-dimension graded intake review producing `evaluation_report.md` |
+| [`skills/open-h-4dphysio-organize-dicom/`](skills/open-h-4dphysio-organize-dicom/) | Split a DICOM pile into the Open-H-4DPhysio layout: group by patient, study and time point, assign de-identified identifiers, keep the crosswalk outside the submission |
+| [`skills/open-h-4dphysio-convert/`](skills/open-h-4dphysio-convert/) | Convert to per-time-point NIfTI — DICOM via pinned dcm2niix, NRRD/Slicer sequences via SimpleITK, vendor 4D ultrasound via the private-tag decoder |
+| [`skills/open-h-4dphysio-verify-layout/`](skills/open-h-4dphysio-verify-layout/) | Verify a submission against the layout specification and explain failures |
+| [`skills/open-h-4dphysio-submission-eval/`](skills/open-h-4dphysio-submission-eval/) | Seven-dimension graded intake review producing `evaluation_report.md` |
 
-[`skills/open-h-4d-shared/`](skills/open-h-4d-shared/) is **support material, not a
+[`skills/open-h-4dphysio-shared/`](skills/open-h-4dphysio-shared/) is **support material, not a
 skill**. It has no `SKILL.md`, so it gets no discovery entry and no agent tries to
 invoke it. It holds the normative layout specification, the RFP summary, the
 sidecar templates, the PHI checklist and the evaluation report template, which
-the four skills read by relative path (`../open-h-4d-shared/layout-spec.md`).
+the four skills read by relative path (`../open-h-4dphysio-shared/layout-spec.md`).
 
 ### Discovery
 
@@ -85,8 +85,8 @@ Claude Code specific.
 - **Tests:** `uv run pytest tests/ -m "not heavy"` for the light suite — no
   network, about 30 seconds. `-m heavy` downloads the real example datasets.
 - **The prose spec and the code must agree.** `tests/test_spec_consistency.py`
-  asserts the naming grammar in `skills/open-h-4d-shared/layout-spec.md` is
-  identical to the patterns compiled in `openh4d.naming`, that both sidecar
+  asserts the naming grammar in `skills/open-h-4dphysio-shared/layout-spec.md` is
+  identical to the patterns compiled in `open_h_4d_physio.naming`, that both sidecar
   templates validate, and that every conformance rule is documented. Editing a
   rule means editing both places; that friction is intentional.
 

@@ -15,11 +15,11 @@ import json
 import numpy as np
 import pytest
 
-from openh4d.convert_dicom import ConvertError, convert_study
-from openh4d.dicom_index import build_plan
-from openh4d.organize_dicom import organize
-from openh4d.synthetic_dicom import write_series
-from openh4d.verify_layout import verify
+from open_h_4d_physio.convert_dicom import ConvertError, convert_study
+from open_h_4d_physio.dicom_index import build_plan
+from open_h_4d_physio.organize_dicom import organize
+from open_h_4d_physio.synthetic_dicom import write_series
+from open_h_4d_physio.verify_layout import verify
 
 SMALL = (8, 8, 4)
 
@@ -165,7 +165,7 @@ def test_organize_convert_verify_passes(organized, dcm2niix_path):
     # The pieces the contributor writes by hand, not the tooling.
     (root / "README.md").write_text("---\nlicense: cc-by-4.0\n---\n# test\n", encoding="utf-8")
     (root / "LICENSE").write_text("CC BY 4.0\n", encoding="utf-8")
-    from openh4d.manifest import build_manifest, write_manifest
+    from open_h_4d_physio.manifest import build_manifest, write_manifest
 
     write_manifest(root, build_manifest(root))
 

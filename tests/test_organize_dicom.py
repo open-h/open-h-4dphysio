@@ -11,16 +11,16 @@ import json
 
 import pytest
 
-from openh4d import naming
-from openh4d.dicom_index import build_plan
-from openh4d.organize_dicom import (
+from open_h_4d_physio import naming
+from open_h_4d_physio.dicom_index import build_plan
+from open_h_4d_physio.organize_dicom import (
     OrganizeError,
     assign_identifiers,
     load_allowlist,
     organize,
     resolve_crosswalk_path,
 )
-from openh4d.synthetic_dicom import write_multi_patient_source, write_series
+from open_h_4d_physio.synthetic_dicom import write_multi_patient_source, write_series
 
 SMALL = (8, 8, 4)
 
@@ -98,7 +98,7 @@ def test_crosswalk_at_the_submission_root_is_refused(tmp_path):
 
 
 def test_crosswalk_defaults_outside_the_submission(tmp_path, monkeypatch):
-    monkeypatch.setenv("OPENH4D_CACHE_DIR", str(tmp_path / "cache"))
+    monkeypatch.setenv("OPEN_H_4D_PHYSIO_CACHE_DIR", str(tmp_path / "cache"))
     root = tmp_path / "submission"
     path = resolve_crosswalk_path(root, None, "example")
     assert root.resolve() not in path.parents
@@ -167,7 +167,7 @@ def test_study_stub_leaves_contributor_fields_null(plan, tmp_path, crosswalk):
 
 def test_the_stub_does_not_verify_until_a_contributor_fills_it_in(plan, tmp_path, crosswalk):
     """The null placeholders must be rejected, or an incomplete submission would pass."""
-    from openh4d.verify_layout import verify
+    from open_h_4d_physio.verify_layout import verify
 
     out = tmp_path / "out"
     organize(plan, out, prefix="STAN", crosswalk=crosswalk, apply=True)
@@ -243,7 +243,7 @@ def test_retained_dicom_is_stripped_to_the_allowlist(tmp_path, crosswalk):
     assert dataset.PixelData
 
 
-def test_patient_id_is_rewritten_to_the_openh4d_identifier(tmp_path, crosswalk):
+def test_patient_id_is_rewritten_to_the_open_h_4d_physio_identifier(tmp_path, crosswalk):
     import pydicom
 
     source = write_series(tmp_path / "src", n_timepoints=2, shape=SMALL)
@@ -271,7 +271,7 @@ def test_no_source_patient_id_survives_anywhere_in_the_tree(tmp_path, crosswalk)
 def test_a_study_with_no_recoverable_time_points_is_blocked_not_guessed(
     tmp_path, crosswalk, monkeypatch
 ):
-    from openh4d import dicom_index
+    from open_h_4d_physio import dicom_index
 
     source = write_series(tmp_path / "src", encoding="none", n_timepoints=2, shape=SMALL)
     monkeypatch.setattr(dicom_index, "LADDER", ())

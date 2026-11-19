@@ -1,6 +1,6 @@
 # Synthetic 4D CT example
 
-Builds a complete Open-H-4D submission from synthetic DICOM, with no network
+Builds a complete Open-H-4DPhysio submission from synthetic DICOM, with no network
 access and in a few seconds. Run this first.
 
 ```bash
@@ -16,7 +16,7 @@ synthetic DICOM  ->  index  ->  PHI pre-flight  ->  organize
 
 Every step is the same code a real contributor runs. The only thing that is not
 real is the data: a sphere translating on a closed loop, written as DICOM by
-`openh4d.synthetic_dicom`.
+`open_h_4d_physio.synthetic_dicom`.
 
 The sphere matters. A generator that emitted noise, or a static shape, would let
 the motion checks pass without measuring anything.
@@ -57,9 +57,9 @@ inside a submission whose name looks like a crosswalk.
 
 ## Requirements
 
-dcm2niix, which `openh4d.fetch_dcm2niix` downloads and caches automatically on
+dcm2niix, which `open_h_4d_physio.fetch_dcm2niix` downloads and caches automatically on
 first use. To check it resolves:
 
 ```bash
-uv run python -m openh4d.fetch_dcm2niix --print-path
+uv run python -m open_h_4d_physio.fetch_dcm2niix --print-path
 ```

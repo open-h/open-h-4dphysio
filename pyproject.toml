@@ -1,12 +1,12 @@
 [project]
-name = "open-h-4d"
+name = "open-h-4dphysio"
 version = "0.1.0"
-description = "Tooling, layout specification, and examples for the Open-H-4D open 4D cardiac and respiratory imaging dataset initiative."
+description = "Tooling, layout specification, and examples for the Open-H-4DPhysio open 4D cardiac and respiratory imaging dataset initiative."
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.11"
 authors = [
-    { name = "Open-H-4D Contributors" },
+    { name = "Open-H-4DPhysio Contributors" },
 ]
 dependencies = [
     "numpy>=1.26",
@@ -21,10 +21,10 @@ dependencies = [
 test = ["pytest", "ruff"]
 
 [project.scripts]
-openh4d = "openh4d.__main__:main"
+open_h_4d_physio = "open_h_4d_physio.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/open-h/open-h-4d"
+Homepage = "https://github.com/open-h/open-h-4dphysio"
 
 [build-system]
 requires = ["setuptools>=68"]
@@ -34,7 +34,7 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-openh4d = ["schemas/*.json", "*.json"]
+open_h_4d_physio = ["schemas/*.json", "*.json"]
 
 [tool.ruff]
 line-length = 100

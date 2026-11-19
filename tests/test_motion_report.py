@@ -12,7 +12,7 @@ import nibabel as nib
 import numpy as np
 import pytest
 
-from openh4d.motion_report import (
+from open_h_4d_physio.motion_report import (
     build_report,
     centroid_displacement,
     centroid_track,
@@ -22,7 +22,7 @@ from openh4d.motion_report import (
     load_series,
     phase_label_order,
 )
-from openh4d.synthetic import generate, moving_sphere
+from open_h_4d_physio.synthetic import generate, moving_sphere
 
 SMALL = (12, 12, 6)
 
@@ -267,7 +267,7 @@ def test_an_all_identical_sequence_is_not_a_closed_cycle(tmp_path):
 
 def test_two_identical_timepoints_are_not_a_cycle():
     """A two-frame study where both frames match is degenerate, not cyclic."""
-    from openh4d.motion_report import is_closed_cycle
+    from open_h_4d_physio.motion_report import is_closed_cycle
 
     assert is_closed_cycle([[0, 1]], 2) is False
     assert is_closed_cycle([[0, 7]], 8) is True
