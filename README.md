@@ -1,13 +1,14 @@
 <div align="center">
 
-<img src="assets/open-h-4dphysio-header-with-hyphen.png" alt="Open-H-4DPhysio" width="100%">
+<img src="assets/open-h-4dphysio-header.png" alt="Open-H-4DPhysio" width="100%">
 
 # Open-H-4DPhysio
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Data](https://img.shields.io/badge/Data-OpenMDW-green.svg?style=for-the-badge)](https://openmdw.ai/)
 
-*A collaborative collection of 4D cardiac and respiratory imaging, for training foundation models of physiological motion.*
+*A collaborative collection of 4D medical images and related clinical data to
+support AI research, development, and validation for emulating physiological processes.
 
 </div>
 
@@ -15,19 +16,19 @@
 
 ## About
 
-Open-H-4DPhysio is an [Open-H.org](https://open-h.org) initiative to collect **20,000
-total cases** of cardiac and/or respiratory motion, including real patient cases
-and simulated cases. Building on Open-H-Embodiment, it aligns leading institutions
-around a single openly licensed corpus. 4D CT, MRI and ultrasound images are
-prioritized; derived models, simulated motion data and other relevant data are
-also accepted through an open proposal category.
+Open-H-4DPhysio is an [Open-H.org](https://open-h.org) initiative that is initially
+focusing on collecting **20,000 cases** of cardiac and/or respiratory motion, including
+real patient as well as simulated cases. Building on Open-H-Embodiment, it aligns
+leading institutions around a single openly licensed corpus. 4D CT, MRI and
+ultrasound images are prioritized; derived data, simulated motion data and other
+relevant data are also accepted through an open proposal category.
 
 The collected datasets will be freely available for academic and commercial use,
 and used to train and validate physics-informed and generative AI models of
-physiological motion. Beyond motion modelling, the data suits detecting imaging
-biomarkers that inform patient-specific physics parameters, training diagnostic
-models that incorporate physiological data, and simulating clinical signals such
-as EKG and spirometry as well as motion artifacts in 3D images.
+physiological processes. Beyond physiological motion modelling, this initial
+data collection suits detecting imaging biomarkers that inform patient-specific
+physics parameters, training diagnostic models, and simulating clinical signals
+such as EKG and spirometry as well as motion artifacts in 3D images.
 
 NVIDIA sponsors Open-H-4DPhysio by pre-processing all submissions and enabling free,
 open access to the dataset, foundation model weights and training code on project
@@ -207,8 +208,8 @@ verifier rejects any submission containing one. See
 | Milestone | Date |
 |---|---|
 | CFP released | September 27, 2026 |
-| Proposal submission deadline | December 1, 2026 |
-| Data collection window | December 1, 2026 – March 1, 2027 |
+| Proposal submission deadline | January 15, 2027 |
+| Data collection window | January 15, 2027 – March 1, 2027 |
 | Data cleanup and standardization | March 1 – May 1, 2027 |
 | Model training and validation | May 1 – July 1, 2027 |
 | First public dataset and model release | August 2027 |
