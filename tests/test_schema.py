@@ -11,13 +11,13 @@ import json
 
 import pytest
 
-from openh4d.schema import (
+from open_h_4d_physio.schema import (
     validate_manifest,
     validate_patient,
     validate_study,
 )
 
-SHARED = "skills/open-h-4d-shared"
+SHARED = "skills/open-h-4dphysio-shared"
 
 
 def _codes(findings):
@@ -37,9 +37,9 @@ def study(repo_root):
 @pytest.fixture
 def manifest():
     return {
-        "schema": "open-h-4d/manifest/1.0",
+        "schema": "open-h-4dphysio/manifest/1.0",
         "submission_id": "example",
-        "generated_by": "openh4d 0.1.0",
+        "generated_by": "open_h_4d_physio 0.1.0",
         "generated_at": "2027-03-04T12:00:00Z",
         "counts": {"patients": 1, "studies": 1, "timepoints": 10, "bytes": 1024},
         "modality_breakdown": {"CT": 1},
@@ -170,7 +170,7 @@ def test_timepoint_indices_must_be_contiguous(study):
 
 
 def test_single_timepoint_is_rejected(study):
-    """Open-H-4D is a 4D initiative; one time point is a 3D study."""
+    """Open-H-4DPhysio is a 4D initiative; one time point is a 3D study."""
     study["timepoints"] = study["timepoints"][:1]
     study["n_timepoints"] = 1
     assert "E_SCHEMA" in _codes(validate_study(study))

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Build an Open-H-4D submission from a 3D Slicer 4D sequence NRRD.
+"""Build an Open-H-4DPhysio submission from a 3D Slicer 4D sequence NRRD.
 
 The source is one file: ``TruncalValve_4DCT.seq.nrrd``, a cardiac-gated 4D CT of
 a truncal valve written by 3D Slicer as a sequence. This is the path a
@@ -18,7 +18,7 @@ are silent failures if handled wrongly:
   SimpleITK normalizes to LPS on read; NIfTI wants RAS. Getting the flip wrong
   mirrors the anatomy and raises nothing at all.
 
-Both are handled in :mod:`openh4d.convert_nrrd`, and this example is the
+Both are handled in :mod:`open_h_4d_physio.convert_nrrd`, and this example is the
 end-to-end check that they stay handled.
 
     python examples/truncalvalve-4dct/build_example.py --out /tmp/oh4d-tv
@@ -34,12 +34,12 @@ import shutil
 import sys
 from pathlib import Path
 
-from openh4d.convert_nrrd import convert
-from openh4d.download import fetch
-from openh4d.manifest import build_manifest, write_manifest
-from openh4d.motion_report import build_report
-from openh4d.naming import ehr_dir_name, make_patient_id, study_dir_name
-from openh4d.verify_layout import verify
+from open_h_4d_physio.convert_nrrd import convert
+from open_h_4d_physio.download import fetch
+from open_h_4d_physio.manifest import build_manifest, write_manifest
+from open_h_4d_physio.motion_report import build_report
+from open_h_4d_physio.naming import ehr_dir_name, make_patient_id, study_dir_name
+from open_h_4d_physio.verify_layout import verify
 
 HERE = Path(__file__).resolve().parent
 
@@ -53,12 +53,12 @@ ID_PREFIX = "CHOP"
 
 DATA_CARD = """\
 ---
-pretty_name: "Open-H-4D -- Truncal Valve 4D CT"
+pretty_name: "Open-H-4DPhysio -- Truncal Valve 4D CT"
 license: cc-by-4.0
 task_categories:
   - image-segmentation
 tags:
-  - open-h-4d
+  - open-h-4dphysio
   - 4d
   - ct
   - heart
@@ -69,9 +69,9 @@ size_categories:
   - n<1K
 ---
 
-# Open-H-4D -- Truncal Valve 4D CT
+# Open-H-4DPhysio -- Truncal Valve 4D CT
 
-A cardiac-gated 4D CT of a truncal valve, restructured into the Open-H-4D
+A cardiac-gated 4D CT of a truncal valve, restructured into the Open-H-4DPhysio
 submission layout from the `TruncalValve_4DCT.seq.nrrd` release asset published
 by [Project-MONAI/monai-physio](https://github.com/Project-MONAI/monai-physio).
 
@@ -83,7 +83,7 @@ time.
 
 ## Dataset Contributor(s)
 
-Restructured by the Open-H-4D tooling from a public release.
+Restructured by the Open-H-4DPhysio tooling from a public release.
 
 ## License / Terms of Use
 
@@ -91,7 +91,7 @@ CC BY 4.0, inherited from the upstream release.
 
 ## Intended Usage
 
-Modelling cardiac valve motion; a worked example of the Open-H-4D layout for
+Modelling cardiac valve motion; a worked example of the Open-H-4DPhysio layout for
 contributors whose data is in a research tool's own format rather than DICOM.
 
 ## Dataset Characterization
@@ -103,7 +103,7 @@ contributors whose data is in a research tool's own format rather than DICOM.
 
 ## Dataset Format
 
-Open-H-4D submission layout: one `t####.nii.gz` per cardiac phase, converted
+Open-H-4DPhysio submission layout: one `t####.nii.gz` per cardiac phase, converted
 from the Slicer sequence with SimpleITK. The source declares RAS; the written
 NIfTI affines carry that geometry through unchanged, with no resampling.
 
@@ -122,8 +122,8 @@ are left null rather than guessed.
 
 ## Data Validation
 
-`python -m openh4d.verify_layout <root>` reports `compliant: true`.
-`python -m openh4d.motion_report <study-dir>` measures the valve motion across
+`python -m open_h_4d_physio.verify_layout <root>` reports `compliant: true`.
+`python -m open_h_4d_physio.motion_report <study-dir>` measures the valve motion across
 the cardiac cycle; peak centre-of-mass travel for this study is
 {peak_travel} voxels.
 
@@ -134,11 +134,11 @@ this: a wrong handedness flip mirrors the anatomy without raising anything.
 ## Known Issues
 
 Subject-level clinical metadata is not available upstream, so `patient.json` is
-sparse. A real Open-H-4D submission is expected to populate it.
+sparse. A real Open-H-4DPhysio submission is expected to populate it.
 
 ## Ethical Considerations
 
-The upstream release is public and de-identified. The Open-H-4D identifier is
+The upstream release is public and de-identified. The Open-H-4DPhysio identifier is
 assigned locally.
 """
 
@@ -199,7 +199,7 @@ def apply_clinical_context(study_dir: Path, n_timepoints: int) -> None:
 
 def write_patient_json(root: Path, patient_id: str, study_ids: list[str]) -> None:
     document = {
-        "schema": "open-h-4d/patient/1.0",
+        "schema": "open-h-4dphysio/patient/1.0",
         "patient_id": patient_id,
         "studies": study_ids,
         "demographics": {
@@ -240,7 +240,7 @@ def write_patient_json(root: Path, patient_id: str, study_ids: list[str]) -> Non
             "performed_by": "upstream release",
             "tooling": None,
             "attestation": (
-                "Publicly released and de-identified upstream. The Open-H-4D identifier is "
+                "Publicly released and de-identified upstream. The Open-H-4DPhysio identifier is "
                 "assigned locally."
             ),
         },
@@ -293,7 +293,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"   note: {observation}", file=sys.stderr)
 
     print("4. writing the data card and manifest")
-    manifest = build_manifest(out, submission_id="openh4d-truncalvalve-4dct")
+    manifest = build_manifest(out, submission_id="open-h-4dphysio-truncalvalve-4dct")
     write_manifest(out, manifest)
     (out / "README.md").write_text(
         DATA_CARD.format(
@@ -306,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
         encoding="utf-8",
     )
     (out / "LICENSE").write_text(CC_BY, encoding="utf-8")
-    write_manifest(out, build_manifest(out, submission_id="openh4d-truncalvalve-4dct"))
+    write_manifest(out, build_manifest(out, submission_id="open-h-4dphysio-truncalvalve-4dct"))
 
     print("5. verifying")
     verification = verify(out)
@@ -321,7 +321,7 @@ def main(argv: list[str] | None = None) -> int:
     if not verification.compliant:
         return 1
 
-    print(f"\nBuilt a compliant Open-H-4D submission at {out}")
+    print(f"\nBuilt a compliant Open-H-4DPhysio submission at {out}")
     print(
         "\nOrientation check, worth doing once by hand: open "
         f"{out / study_id / 't0000.nii.gz'} alongside the original sequence in 3D Slicer and "

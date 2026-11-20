@@ -51,7 +51,7 @@ CLAUDE_SKILLS_DIR = REPO_ROOT / ".claude" / "skills"
 def discoverable_skills(skills_dir: Path = SKILLS_DIR) -> list[str]:
     """Names of skill directories that carry a SKILL.md, sorted.
 
-    A directory without a SKILL.md (such as ``open-h-4d-shared``) is shared
+    A directory without a SKILL.md (such as ``open-h-4dphysio-shared``) is shared
     support material, not an invocable skill, and deliberately gets no entry
     under ``.claude/skills`` so agents do not try to invoke it.
     """

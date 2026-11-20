@@ -1,6 +1,6 @@
-# Open-H-4D examples
+# Open-H-4DPhysio examples
 
-Three worked examples, each building a complete, verifiable Open-H-4D submission
+Three worked examples, each building a complete, verifiable Open-H-4DPhysio submission
 from a different kind of starting point. Copy the one closest to your data.
 
 | Example | Starting point | Download | Runs in CI |
@@ -15,13 +15,13 @@ Each is a single script:
 uv run python examples/synthetic-4d/build_example.py --out /tmp/oh4d-synthetic
 ```
 
-Every script ends by running `openh4d.verify_layout` and exits non-zero if the
+Every script ends by running `open_h_4d_physio.verify_layout` and exits non-zero if the
 submission it just built does not pass. That is the point of them: they are
 executable documentation of what a valid submission looks like, and they fail
 loudly if the layout and the tooling drift apart.
 
-Downloads are cached under the Open-H-4D cache directory
-(`python -m openh4d.fetch_dcm2niix --show-cache`), so re-running an example
+Downloads are cached under the Open-H-4DPhysio cache directory
+(`python -m open_h_4d_physio.fetch_dcm2niix --show-cache`), so re-running an example
 costs nothing after the first time.
 
 ## Start here

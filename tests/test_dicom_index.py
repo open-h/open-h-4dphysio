@@ -10,8 +10,8 @@ where two rungs disagree is checked to report rather than resolve.
 import numpy as np
 import pytest
 
-from openh4d import dicom_index
-from openh4d.dicom_index import (
+from open_h_4d_physio import dicom_index
+from open_h_4d_physio.dicom_index import (
     CONFIDENCE_LOW,
     build_plan,
     order_slices,
@@ -19,7 +19,7 @@ from openh4d.dicom_index import (
     recover_timepoints,
     scan,
 )
-from openh4d.synthetic_dicom import write_multi_patient_source, write_series
+from open_h_4d_physio.synthetic_dicom import write_multi_patient_source, write_series
 
 SMALL = (8, 8, 4)
 

@@ -7,7 +7,7 @@ identifier ending in a digit is what makes ``STAN-001AB`` parse exactly one way.
 
 import pytest
 
-from openh4d.naming import (
+from open_h_4d_physio.naming import (
     KIND_EHR,
     KIND_STUDY,
     InvalidNameError,

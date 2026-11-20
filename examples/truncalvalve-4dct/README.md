@@ -1,6 +1,6 @@
 # Truncal Valve 4D CT example
 
-Converts a 3D Slicer 4D sequence (`.seq.nrrd`) into the Open-H-4D submission
+Converts a 3D Slicer 4D sequence (`.seq.nrrd`) into the Open-H-4DPhysio submission
 layout. One subject, one cardiac-gated 4D CT study, 21 time points.
 
 ```bash
@@ -12,7 +12,7 @@ Downloads ~1.3 GB on first run and caches it.
 ## Why this example exists
 
 Two properties of a Slicer sequence are silent failures if handled wrongly. Both
-are handled in `openh4d.convert_nrrd`; this example is the end-to-end check that
+are handled in `open_h_4d_physio.convert_nrrd`; this example is the end-to-end check that
 they stay handled.
 
 **The time axis comes first.** The real header reads:

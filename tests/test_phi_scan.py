@@ -11,15 +11,15 @@ import json
 
 import pytest
 
-from openh4d import phi_scan
-from openh4d.phi_scan import (
+from open_h_4d_physio import phi_scan
+from open_h_4d_physio.phi_scan import (
     looks_like_a_pseudonym,
     scan_dicom_source,
     scan_submission,
     scan_text,
 )
-from openh4d.synthetic import generate
-from openh4d.synthetic_dicom import write_series
+from open_h_4d_physio.synthetic import generate
+from open_h_4d_physio.synthetic_dicom import write_series
 
 SMALL = (8, 8, 4)
 
@@ -141,7 +141,7 @@ def test_private_tags_are_a_warning_not_a_blocker(tmp_path):
     source = write_series(tmp_path / "private", n_timepoints=2, shape=SMALL)
     target = sorted(source.glob("*.dcm"))[0]
     dataset = pydicom.dcmread(str(target))
-    block = dataset.private_block(0x000B, "OPENH4D TEST", create=True)
+    block = dataset.private_block(0x000B, "OPEN_H_4D_PHYSIO TEST", create=True)
     block.add_new(0x01, "LO", "vendor payload")
     dataset.save_as(str(target), enforce_file_format=True)
 
